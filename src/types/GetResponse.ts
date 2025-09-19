@@ -1,4 +1,1 @@
-export interface IGetPollinationText{
-    output: string
-    input:string
-}
+export type IGetPollinationText = string;

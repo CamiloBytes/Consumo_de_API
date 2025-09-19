@@ -8,7 +8,6 @@ export const useGetPollinationText = (prompt: string | null ) => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        debugger
         if (!prompt) return;
 
         let cancel = false;
@@ -19,10 +18,9 @@ export const useGetPollinationText = (prompt: string | null ) => {
                 const response = await api.get<IGetPollinationText>(`/${encodeURIComponent(prompt)}`, {
                     params: {
                         model: "openai",
-                        response_format: "json_object"
                     }
                 });
-
+                
                 console.log("Respuesta de la API:", response.data);
 
                 if (!cancel) setData(response.data);

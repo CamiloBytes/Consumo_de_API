@@ -1,6 +1,9 @@
 
 import './App.css'
-import Home from './pages/home'
+import AppRouter from './routes/router'
+
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; //theme
 
 
 
@@ -9,7 +12,7 @@ function App() {
 
   return (
     <>
-      <Home/>
+      <AppRouter/>
     </>
   )
 }

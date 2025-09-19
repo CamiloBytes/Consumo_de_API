@@ -1,12 +1,15 @@
 
 import { useState } from "react";
 import { useGetPollinationText } from "../hooks/getResponseIA";
+import { InputText } from "primereact/inputtext";
 
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
 
 export default function TextComponent() {
     const [input, setInput] = useState('');
     const [prompt, setPrompt] = useState('');
-    const { data, loading, error } = useGetPollinationText(prompt);
+    const { data, error } = useGetPollinationText(prompt);
 
     const handleSubmit = () => {
         if (input.trim()) {
@@ -15,22 +18,25 @@ export default function TextComponent() {
     };
 
     return (
-        <div style={{ padding: "1rem" }}>
-            <h1>Generador de Texto</h1>
-            <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Escribe tu prompt"
-            />
-            <button onClick={handleSubmit}>Generar</button>
+        <div className="flex flex-col justify-center items-center p-2.5">
+            <h1 className="font-bold text-4xl mt-1" >Generador de Texto</h1>
+            
+            <div className="card flex justify-content-center">
+                <InputText value={input} onChange={(e) => setInput(e.target.value)} />
+            </div>
+            <div className="card flex flex-wrap justify-content-center gap-3">
+                <Button label="Submit" icon="pi pi-check"  onClick={handleSubmit} />
+            </div>
+            
 
-            {loading && <p>Cargando...</p>}
+
             {error && <p style={{ color: "red" }}>Error: {error}</p>}
             {data && (
-                <div>
-                    <h2>Texto generado:</h2>
-                    <pre>{data.input}</pre>
-                </div>
+                <Card title="Respuesta">
+                    <p>{data}</p>
+                </Card>
+        
+                
             )}
         </div>
     );
